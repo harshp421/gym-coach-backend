@@ -1,0 +1,1 @@
+{"version":3,"file":"split-label.js","sourceRoot":"","sources":["../../../../src/features/coach/service/split-label.ts"],"names":[],"mappings":"AAEA,yEAAyE;AACzE,wEAAwE;AACxE,yBAAyB;AACzB,MAAM,CAAC,MAAM,WAAW,GAA8B;IAClD,SAAS,EAAE,WAAW;IACtB,WAAW,EAAE,eAAe;IAC5B,cAAc,EAAE,oBAAoB;IACpC,SAAS,EAAE,WAAW;IACtB,MAAM,EAAE,QAAQ;CACnB,CAAA"}
