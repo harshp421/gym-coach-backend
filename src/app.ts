@@ -35,7 +35,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://trainer-ai.vercel.app/",
+      "https://trainer-ai.vercel.app",
       "https://gym-coach-frontend.vercel.app",
     ],
     credentials: true,
