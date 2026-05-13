@@ -57,6 +57,23 @@ app.get("/health", async (_req: Request, res: Response) => {
   }
 });
 
+// Cookie debug — visible from the frontend without exposing values. Hit
+// it from the browser console after sign-in:
+//   await fetch('https://gym-coach-backend.vercel.app/api/v1/__debug',
+//     { credentials: 'include' }).then(r => r.json())
+// If `cookieNames` is empty here but DevTools shows gc_session under the
+// backend domain, the browser is refusing to send it cross-site.
+app.get("/api/v1/__debug", (req: Request, res: Response) => {
+  res.json({
+    origin: req.headers.origin ?? null,
+    referer: req.headers.referer ?? null,
+    cookieNames: Object.keys(req.cookies ?? {}),
+    hasSession: Boolean(req.cookies?.gc_session),
+    secFetchSite: req.headers["sec-fetch-site"] ?? null,
+    secFetchStorageAccess: req.headers["sec-fetch-storage-access"] ?? null,
+  });
+});
+
 // API docs: Swagger UI at /docs, raw OpenAPI JSON at /docs.json. Only
 // mounted outside production so we don't leak the full API surface to
 // drive-by scanners. Set GYM_DOCS_ENABLED=1 to force-enable in prod.
