@@ -38,7 +38,8 @@ app.use(
       "http://localhost:5173",
       "https://trainer-ai.vercel.app",
       "https://gym-coach-frontend.vercel.app",
-      "https://harsh-v1.vercel.app/"
+      "https://harsh-v1.vercel.app",
+  
     ],
     credentials: true,
   }),

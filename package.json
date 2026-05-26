@@ -4,12 +4,12 @@
   "type": "module",
   "main": "src/server.ts",
   "scripts": {
-    "dev": "concurrently -n api,worker -c blue,magenta \"npm:dev:api\" \"npm:dev:worker\"",
-    "dev:api": "tsx watch src/server.ts",
-    "dev:worker": "tsx watch src/worker.ts",
-    "start": "node dist/server.js",
-    "start:worker": "node dist/worker.js",
-    "build": "tsc",
+    "dev": "node init && concurrently -n api,worker -c blue,magenta \"npm:dev:api\" \"npm:dev:worker\"",
+    "dev:api": "node init && tsx watch src/server.ts",
+    "dev:worker": "node init && tsx watch src/worker.ts",
+    "start": "node init && node dist/server.js",
+    "start:worker": "node init && node dist/worker.js",
+    "build": "node init && tsc",
     "migrate": "tsx migration/migrate.ts",
     "seed:exercises": "tsx migration/seed-exercises.ts",
     "seed:test-user": "tsx migration/seed-test-user.ts"
