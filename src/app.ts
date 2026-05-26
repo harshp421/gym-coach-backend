@@ -21,6 +21,7 @@ import sessionsRouter from "./features/workouts/routes/sessions.routes.js";
 import planEditRouter from "./features/workouts/routes/plan-edit.routes.js";
 import coachRouter from "./features/coach/routes/coach.routes.js";
 import dietRouter from "./features/diet/routes/diet.routes.js";
+import AboutMERouter from './features/about-me/routes/about-me.routes.js'
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(
       "http://localhost:5173",
       "https://trainer-ai.vercel.app",
       "https://gym-coach-frontend.vercel.app",
+      "https://harsh-v1.vercel.app/"
     ],
     credentials: true,
   }),
@@ -97,6 +99,11 @@ if (docsEnabled) {
 // limiters (auth, coach) still apply on top — Express runs them in order.
 app.use("/api/v1", rateLimit("api"));
 
+// Public, no-auth route. Must be mounted BEFORE profileRouter — that router
+// is mounted at the bare "/api/v1" and applies requireAuth to every request
+// it sees, so anything after it under /api/v1 inherits that 401 gate.
+app.use("/api/v1", AboutMERouter);
+
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1", profileRouter);
 app.use("/api/v1/exercises", exercisesRouter);
@@ -106,7 +113,6 @@ app.use("/api/v1/workouts", sessionsRouter);
 app.use("/api/v1/workouts", planEditRouter);
 app.use("/api/v1/coach", coachRouter);
 app.use("/api/v1/diet", dietRouter);
-
 app.use((_req, res) => {
   res.status(404).json({ error: "Not found" });
 });
